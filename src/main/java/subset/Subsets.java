@@ -4,12 +4,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Subsets {
+//    public static List<List<Integer>> findSubsets(int[] nums) {
+//        List<List<Integer>> subsets = new ArrayList<>();
+//        List<List<Integer>> rs = new ArrayList<>();
+//        subsets.add(new ArrayList<>());
+//        findSubsets(nums,subsets, rs);
+//        return rs;
+//    }
+
     public static List<List<Integer>> findSubsets(int[] nums) {
         List<List<Integer>> subsets = new ArrayList<>();
-        List<List<Integer>> rs = new ArrayList<>();
         subsets.add(new ArrayList<>());
-        findSubsets(nums,subsets, rs);
-        return rs;
+        for(int i = 0; i < nums.length; i++) {
+            int n = subsets.size();
+            for(int j =0; j < n; j++) {
+                List<Integer> currentSubset = subsets.get(j);
+                List<Integer> clonedCurrentSubset = new ArrayList<>(currentSubset);
+                clonedCurrentSubset.add(nums[i]);
+                subsets.add(clonedCurrentSubset);
+            }
+        }
+        return subsets;
     }
 
     public static void findSubsets(int[] nums, List<List<Integer>> subsets, List<List<Integer>> rs) {
