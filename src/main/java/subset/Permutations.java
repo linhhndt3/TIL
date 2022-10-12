@@ -6,7 +6,7 @@ import java.util.List;
 public class Permutations {
     public static List<List<Integer>> findPermutations(int[] nums) {
         List<List<Integer>> result = new ArrayList<>();
-        // TODO: Write your code here
+        // TODO: Refactor this by using queue
         result.add(new ArrayList<>());
         for(int i = 0; i < nums.length; i++) {
             List<List<Integer>> tempRs = new ArrayList<>();
