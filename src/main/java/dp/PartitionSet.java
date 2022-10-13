@@ -41,7 +41,7 @@ public class PartitionSet {
                     rs[i][j] = currentNum == j || rs[i-1][j-currentNum] || rs[i-1][j];
                 }
                 if(rs[i][j]) {
-                    min = min < Math.abs(sum -2*j) ? min : Math.abs(sum -2*j);
+                    min = min < Math.abs(sum -2*j) ? min : Math.abs(sum - 2*j);
                 }
             }
         }
