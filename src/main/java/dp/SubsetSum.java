@@ -31,4 +31,6 @@ public class SubsetSum {
         num = new int[] { 1, 3, 4, 8 };
         System.out.println(ss.canPartition(num, 6));
     }
+
+
 }

@@ -10,7 +10,7 @@ public class MaximumPathSum {
     }
 
     public int findDiameterHelper(TreeNode node) {
-        // TODO: Write your code here
+        // TODO: finish it after build the map
 
         int d1 = node.val;
         if(node.left != null) {
