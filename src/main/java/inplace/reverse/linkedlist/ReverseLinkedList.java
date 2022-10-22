@@ -3,6 +3,7 @@ package inplace.reverse.linkedlist;
 public class ReverseLinkedList {
     public static ListNode reverse(ListNode head) {
         // TODO pls recall(encapsulate knowledge)
+        // TODO recall the felling that is uncomfortable when you are panic
         ListNode pre = null;
         ListNode next = head;
         while (next != null) {
