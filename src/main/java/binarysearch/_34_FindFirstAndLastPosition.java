@@ -34,7 +34,6 @@ public class _34_FindFirstAndLastPosition {
             if(nums[mid] < target) {
                 start = mid + 1;
             } else  {
-
                 end = mid;
             }
         }
