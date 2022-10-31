@@ -5,7 +5,7 @@ public class _162_FindPeakElement {
         int peakIndex = -1;
         int s = 0;
         int end = nums.length - 1;
-        // TODO why s = mid + 1 or end = mid - 1
+        // TODO why s = mid + 1 or end = mid - 1, check the last successful commit
         while(s <= end) {
             int mid = (s + end) / 2;
             if( ((mid - 1 < 0) || nums[mid] > nums[mid-1] ) && ((mid + 1) > end || nums[mid] > nums[mid+1])) {
