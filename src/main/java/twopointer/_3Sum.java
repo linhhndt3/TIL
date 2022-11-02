@@ -2,16 +2,21 @@ package twopointer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class _3Sum {
     public List<List<Integer>> threeSum(int[] nums) {
+        // TODO improve performance
         List<List<Integer>> rss = new ArrayList<>();
         Arrays.sort(nums);
-        removeDuplicate(nums);
         for(int i = 0; i < nums.length - 1; i++) {
+            if(i > 0 && nums[i] == nums[i-1]) {
+                continue;
+            }
             for(int j = i + 1; j < nums.length; j++) {
+                if(j > (i+1) && nums[j] == nums[j-1]) {
+                    continue;
+                }
                 int index = findIndex(0 - (nums[i] + nums[j]),j+1,nums.length - 1,nums);
                 if(index != -1) {
                     List<Integer> rs = new ArrayList<>();
@@ -23,11 +28,6 @@ public class _3Sum {
             }
         }
         return rss;
-    }
-
-    private int[] removeDuplicate(int[] nums) {
-        // TODO impl
-        return null;
     }
 
     private int findIndex(int target, int start, int end, int[] nums) {
