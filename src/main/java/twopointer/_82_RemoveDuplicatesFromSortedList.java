@@ -2,6 +2,7 @@ package twopointer;
 
 public class _82_RemoveDuplicatesFromSortedList {
     public ListNode deleteDuplicates(ListNode head) {
+        //TODO refactor
         if(head == null) {
             return head;
         }
