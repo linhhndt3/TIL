@@ -2,7 +2,7 @@ package _75_questions;
 
 import java.util.Stack;
 
-public class ValidParentheses {
+public class ValidParentheses_v1 {
     public boolean isValid(String s) {
         Stack<Character> stack = new Stack();
         for(char c: s.toCharArray()){
