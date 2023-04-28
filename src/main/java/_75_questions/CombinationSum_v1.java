@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CombinationSum_v1 {
-    // TODO review
+    // TODO review and enhancement(sort the array before backtracking)
     // TODO note: combination sum(2 things 1st: dfs=backtracking, 2nd: avoid duplicate)
     public static void main(String[] args) {
         new CombinationSum_v1().combinationSum(new int[]{8,7,4,3},11);
