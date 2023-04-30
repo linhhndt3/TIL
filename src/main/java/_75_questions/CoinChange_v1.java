@@ -1,5 +1,6 @@
 package _75_questions;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -7,31 +8,26 @@ public class CoinChange_v1 {
 
     public static void main(String[] args) {
         new CoinChange_v1().coinChange(new int[]{1,2,5},11);
+//        new CoinChange_v1().coinChange(new int[]{2},3);
+//        new CoinChange_v1().coinChange(new int[]{1},0);
     }
 
     public int coinChange(int[] coins, int amount) {
-        int[] rs = new int[amount+1];
-        for(int i = 0; i < coins.length; i++) {
-            rs[coins[i]] = 1;
+        if(amount < 0 || coins.length == 0 || coins == null) {
+            return 0;
         }
-
+        int[] rs = new int[amount+1];
+        Arrays.fill(rs, amount+1); // TODO why we fill it with amount + 1
         rs[0] = 0;
         for(int a=1; a <= amount;a++) {
-            if(rs[a] != 0) {
-                rs[a] = 1;
-                continue;
-            }
-            int min = Integer.MAX_VALUE;
-            for(int c = 0; c < coins.length;c ++) {
-                int tempAmount = a - coins[c];
-                if(tempAmount <= 0) {
-                    continue;
-                } else {
-                    min = min >=  1 + rs[tempAmount] ? 1 + rs[tempAmount] : min;
+            for(int i = 0; i < coins.length; i++) {
+                if(a-coins[i] >= 0) {
+                    rs[a] = Math.min(rs[a],1 + rs[a-coins[i]]);
                 }
             }
-            rs[a] = min;
+
+
         }
-        return rs[amount];
+        return rs[amount] == (amount + 1) ? -1 : rs[amount];
     }
 }
