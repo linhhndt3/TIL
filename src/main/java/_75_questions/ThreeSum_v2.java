@@ -9,6 +9,7 @@ public class ThreeSum_v2 {
         Arrays.sort(nums);
         List<List<Integer>> rs = new ArrayList<>();
         // TODO enhancement for running time
+        // TODO improve listening & understanding skill by listing the video explaination
         for(int i = 0; i <= nums.length-3; i++) {
             if(i > 0 && nums[i] == nums[i-1]) {
                 continue;
