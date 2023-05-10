@@ -5,12 +5,12 @@ import java.util.Set;
 
 public class ContainsDuplicate {
     public boolean containsDuplicate(int[] nums) {
-        Set<Integer> set = new HashSet<>();
+        int[] bucket = new int[(int)Math.pow(10,9)];
         for(int i = 0; i < nums.length; i++) {
-            if(set.contains(nums[i])) {
+            if(bucket[nums[i]] == 1) {
                 return true;
             } else {
-                set.add(nums[i]);
+                bucket[nums[i]] = 1;
             }
         }
         return false;
