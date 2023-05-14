@@ -6,6 +6,9 @@ import java.util.Map;
 public class BinaryTreeMaximumPathSum {
     // rough id
     // if we know the max path of root.left and root.right, we can get the max path sum
+
+    // TODO
+    // identified and detected that the rough idea(intuition) is not correct
     public int maxPathSum(TreeNode root) {
         int maxSum = Integer.MIN_VALUE;
         Map<TreeNode,Integer> maxPathSum = new HashMap<>();
