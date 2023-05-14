@@ -43,11 +43,11 @@ public class BinaryTreeMaximumPathSum {
         int maxPathSumLeft = maxPathSum.getOrDefault(node.left,Integer.MIN_VALUE);
         int maxPathSumRight = maxPathSum.getOrDefault(node.right,Integer.MIN_VALUE);
 
-        int maxPathIncludeCurrentNode = -1;
-        int maxPathIncludeLeftAndRight= -1;
+        int maxPathIncludeCurrentNode = Integer.MIN_VALUE;
+        int maxPathIncludeLeftAndRight= Integer.MIN_VALUE;
         if(maxPathIncludeRootLeft != Integer.MIN_VALUE && maxPathIncludeRootRight != Integer.MIN_VALUE) {
-            maxPathIncludeCurrentNode = findMax(currentVal + maxPathIncludeRootLeft,currentVal + maxPathIncludeRootRight);
-            maxPathIncludeLeftAndRight = findMax(currentVal+maxPathIncludeRootLeft+maxPathIncludeRootRight, maxPathIncludeCurrentNode);
+            maxPathIncludeCurrentNode = findMax(currentVal,currentVal + maxPathIncludeRootLeft,currentVal + maxPathIncludeRootRight);
+            maxPathIncludeLeftAndRight = findMax(currentVal,currentVal+maxPathIncludeRootLeft+maxPathIncludeRootRight, maxPathIncludeCurrentNode);
         } else if(maxPathIncludeRootLeft == Integer.MIN_VALUE && maxPathIncludeRootRight != Integer.MIN_VALUE) {
             maxPathIncludeCurrentNode = findMax(currentVal, currentVal + maxPathIncludeRootRight);
         } else if(maxPathIncludeRootLeft != Integer.MIN_VALUE && maxPathIncludeRootRight == Integer.MIN_VALUE) {
