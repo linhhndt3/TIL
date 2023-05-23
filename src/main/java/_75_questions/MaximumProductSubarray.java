@@ -3,32 +3,31 @@ package _75_questions;
 public class MaximumProductSubarray {
 
     public int maxProduct(int[] nums) {
-        int[] dp = new int[nums.length+1];
-        int max = Integer.MIN_VALUE;
-        dp[nums.length] = 1;
-        for(int index = nums.length-1;index >= 0; index--) {
-            int currentValue = nums[index];
-            int lastMaxProduct = dp[index+1];
-            if((currentValue > 0 && lastMaxProduct > 0) || (currentValue < 0 && lastMaxProduct < 0)) {
-                dp[index] = currentValue * lastMaxProduct;
-                max = max > dp[index] ? max : dp[index];
-            } else if( (currentValue < 0 && lastMaxProduct > 0) || (currentValue > 0 &&  lastMaxProduct < 0)) {
-                dp[index] = currentValue;
-                max = max > dp[index] ? max : dp[index];
-            } else if(currentValue == 0) {
-                dp[index] = currentValue;
-                max = max > dp[index] ? max : dp[index];
-            } else if(lastMaxProduct == 0) {
-                if(currentValue >= 0) {
-                    dp[index] = currentValue;
-                    max = max > dp[index] ? max : dp[index];
-                } else {
-                    dp[index] = 0;
-                    max = max > dp[index] ? max : dp[index];
-                }
-            }
+        int maxSoFar = nums[0];
+        int maxEndHere = nums[0];
+        int minEndHere = nums[0];
+
+
+        for(int i = 1; i < nums.length;i++) {
+            int tempMax = maxEndHere;
+            int tempMin = minEndHere;
+
+            maxEndHere = findMax(tempMax * nums[i], tempMin * nums[i], nums[i]);
+            minEndHere = findMin(tempMax * nums[i], tempMin * nums[i], nums[i]);
+
+            maxSoFar = Math.max(maxSoFar,maxEndHere);
         }
 
-        return max;
+        return maxSoFar;
+    }
+
+    int findMax(int a, int b, int c) {
+        int maxOfab = Math.max(a, b);
+        return Math.max(maxOfab, c);
+    }
+
+    int findMin(int a, int b, int c) {
+        int minOfab = Math.min(a, b);
+        return Math.min(minOfab, c);
     }
 }
