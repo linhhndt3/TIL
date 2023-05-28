@@ -2,7 +2,7 @@ package _75_questions;
 
 import java.util.*;
 
-public class WordBreak {
+public class WordBreak_v1 {
 
     // TODO enhance runtime
     public boolean wordBreak(String s, List<String> wordDict) {
