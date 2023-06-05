@@ -22,7 +22,7 @@ public class _79_WordSearch {
         if(r < 0 || c < 0 || r >= m || c >= n) {
             return false;
         }
-        if(board[r][c] == 'x') {
+        if(board[r][c] == '_') {
             return false;
         }
 
@@ -31,7 +31,7 @@ public class _79_WordSearch {
         }
 
         char temp = board[r][c];
-        board[r][c] = 'x';
+        board[r][c] = '_';
         boolean rs = false;
         for(int[] d : dir) {
             rs = rs || existHelper(board,m,n,r+d[0],c+d[1],dir,word,index+1);
