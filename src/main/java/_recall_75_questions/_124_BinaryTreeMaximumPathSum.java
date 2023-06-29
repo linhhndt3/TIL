@@ -1,15 +1,6 @@
-package _75_questions;
+package _recall_75_questions;
 
-import java.util.HashMap;
-import java.util.Map;
-
-public class BinaryTreeMaximumPathSum {
-    // rough id
-    // if we know the max path of root.left and root.right, we can get the max path sum
-
-    // TODO
-    // identified and detected that the rough idea(intuition) is not correct
-
+public class _124_BinaryTreeMaximumPathSum {
     int max = Integer.MIN_VALUE;
     public int maxPathSum(TreeNode root) {
         maxPathSumHelper(root);
@@ -30,8 +21,8 @@ public class BinaryTreeMaximumPathSum {
 
         int currentVal = node.val;
 
-        int maxSeperatePath = Math.max(maxLeft + currentVal, maxRight + currentVal);
-        max = findMax(max,maxSeperatePath, currentVal,maxLeft + maxRight + currentVal, maxLeft,maxRight);
+        int maxSeperatePath = findMax(maxLeft + currentVal, maxRight + currentVal,currentVal);
+        max = findMax(max,maxSeperatePath,maxLeft + maxRight + currentVal,currentVal);
         return maxSeperatePath;
     }
 
@@ -43,7 +34,7 @@ public class BinaryTreeMaximumPathSum {
     }
 
     int findMax(Integer... args) {
-        int max = Integer.MIN_VALUE;
+        int max = args[0];
         for(Integer arg : args) {
             if(arg >= max) {
                 max = arg;
@@ -51,5 +42,4 @@ public class BinaryTreeMaximumPathSum {
         }
         return max;
     }
-
 }
