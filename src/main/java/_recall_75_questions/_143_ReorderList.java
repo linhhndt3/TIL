@@ -2,9 +2,6 @@ package _recall_75_questions;
 
 public class _143_ReorderList {
 
-    // TODO
-    // 1. fast pointer not correct
-    // 2. cycle found when merge 2 list
     public void reorderList(ListNode head) {
         if(head == null || head.next == null) {
             return;
@@ -17,19 +14,17 @@ public class _143_ReorderList {
                 break;
             }
             fastPointer = fastPointer.next;
-            System.out.println("current fp :" + fastPointer.val);
             if(fastPointer.next == null) { // old size
                 slowPointer = slowPointer.next;
                 break;
             }
             slowPointer = slowPointer.next;
-            fastPointer = fastPointer.next.next;
+            fastPointer = fastPointer.next;
         }
 
-        System.out.println("sl start with val: " + slowPointer.val);
         // 2nd list
         ListNode secondList = slowPointer.next;
-        System.out.println("seconlist start with val: " + secondList.val);
+
         // connect slow pointer to null -> 1st list;
         slowPointer.next = null;
 
@@ -47,11 +42,12 @@ public class _143_ReorderList {
         ListNode currentP1 = head;
         ListNode currentP2 = pre;
 
-        System.out.println("currentP1 val: " + head.val);
-        System.out.println("currentP2 val: " + pre.val);
         while (pre != null) {
             currentP1 = head;
             currentP2 = pre;
+
+            ListNode tempNextP1 = currentP1.next;
+            ListNode tempNextP2 = currentP2.next;
 
             currentP1.next = currentP2;
             if(currentMergedList != null) {
@@ -61,12 +57,12 @@ public class _143_ReorderList {
                 currentMergedList = currentP2;
             }
 
-            head = head.next;
-            pre = pre.next;
+            head = tempNextP1;
+            pre = tempNextP2;
         }
-
         if(head != null) {
             currentMergedList.next = head;
         }
+    }
     }
 }
