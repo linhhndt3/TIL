@@ -26,9 +26,11 @@ public class _494_TargetSum {
         }
 
         int[] targetsDp = new int[max-min+1];
+        Map<Integer,Integer> mapValueAndIndex = new HashMap<>();
 
         for(int i = 0 ; i < targetsDp.length; i++) {
             targetsDp[i] = min++;
+            mapValueAndIndex.put(targetsDp[i],i);
         }
 
         int[][] dp = new int[nums.length][targetsDp.length];
@@ -43,16 +45,16 @@ public class _494_TargetSum {
 
         for(int i = nums.length - 2; i >= 0; i--) {
             for(int j = 0; j < targetsDp.length; j++) {
-                if(targetsDp[j]-nums[i] >= 0 && targetsDp[j]-nums[i] < dp[0].length) {
-                    dp[i][j] += dp[i+1][targetsDp[j]-nums[i]];
+                if(mapValueAndIndex.get(targetsDp[j]-nums[i]) != null) {
+                    dp[i][j] += dp[i+1][mapValueAndIndex.get(targetsDp[j]-nums[i])];
                 }
-                if(targetsDp[j]+nums[i] >= 0 && targetsDp[j]+nums[i] < dp[0].length) {
-                    dp[i][j] += dp[i+1][targetsDp[j]+nums[i]];
+                if(mapValueAndIndex.get(targetsDp[j]+nums[i]) != null) {
+                    dp[i][j] += dp[i+1][mapValueAndIndex.get(targetsDp[j]+nums[i])];
                 }
             }
         }
 
-        return dp[1][target-nums[0]] + dp[1][target+nums[0]];
+        return dp[0][mapValueAndIndex.get(target)];
 
     }
 
