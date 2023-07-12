@@ -4,61 +4,62 @@ import java.util.*;
 
 public class _494_TargetSum {
     public int findTargetSumWays(int[] nums, int target) {
+        Map<Key,Integer> dp = new HashMap<>();
+        helper(nums,target,0,dp);
+        return dp.get(new Key(0,target));
+    }
 
-        int min = Integer.MAX_VALUE;
-        int max = Integer.MIN_VALUE;
-        Queue<Integer> queue = new LinkedList<>();
-        min = Math.min(target-nums[0], nums[0]+target);
-        max = Math.max(target-nums[0], nums[0]+target);
-        queue.add(target-nums[0]);
-        queue.add(nums[0]+target);
-        for(int i = 1; i < nums.length; i++) {
-            Queue<Integer> tempQueue = new LinkedList<>();
-            while (!queue.isEmpty()) {
-                int newTarget = queue.poll();
-                min = Math.min(min,Math.min(newTarget-nums[i], nums[i]+newTarget));
-                max = Math.max(max,Math.max(newTarget-nums[i], nums[i]+newTarget));
-
-                tempQueue.add(newTarget-nums[i]);
-                tempQueue.add(nums[i]+newTarget);
-            }
-            queue = tempQueue;
+    private void helper(int[] nums, int target, int pointer, Map<Key,Integer> dp) {
+        Key key = new Key(pointer,target);
+        if(dp.containsKey(key)) {
+            return;
         }
 
-        int[] targetsDp = new int[max-min+1];
-        Map<Integer,Integer> mapValueAndIndex = new HashMap<>();
-
-        for(int i = 0 ; i < targetsDp.length; i++) {
-            targetsDp[i] = min++;
-            mapValueAndIndex.put(targetsDp[i],i);
-        }
-
-        int[][] dp = new int[nums.length][targetsDp.length];
-
-        for(int i = 0; i < dp[0].length; i++) {
-            if(nums[nums.length - 1] == targetsDp[i] || nums[nums.length - 1] == -1*targetsDp[i]) {
-                dp[nums.length-1][i] = 1;
+        if(pointer == nums.length-1) {
+            if(nums[pointer] == target || nums[pointer] == -1 * target) {
+                if(target==0) {
+                    dp.put(key,2);
+                } else {
+                    dp.put(key,1);
+                }
             } else {
-                dp[nums.length-1][i] = 0;
+                dp.put(key,0);
             }
+            return;
         }
 
-        for(int i = nums.length - 2; i >= 0; i--) {
-            for(int j = 0; j < targetsDp.length; j++) {
-                if(mapValueAndIndex.get(targetsDp[j]-nums[i]) != null) {
-                    dp[i][j] += dp[i+1][mapValueAndIndex.get(targetsDp[j]-nums[i])];
-                }
-                if(mapValueAndIndex.get(targetsDp[j]+nums[i]) != null) {
-                    dp[i][j] += dp[i+1][mapValueAndIndex.get(targetsDp[j]+nums[i])];
-                }
-            }
-        }
-
-        return dp[0][mapValueAndIndex.get(target)];
-
+        helper(nums,target-nums[pointer],pointer+1,dp);
+        helper(nums,target+nums[pointer],pointer+1,dp);
+        int first = dp.get(new Key(pointer+1,target-nums[pointer]));
+        int second = dp.get(new Key(pointer+1,target+nums[pointer]));
+        dp.put(key, (first+second));
     }
 
     public static void main(String[] args) {
         System.out.println(new _494_TargetSum().findTargetSumWays(new int[]{1,1,1,1,1}, 3));
+//        System.out.println(new _494_TargetSum().findTargetSumWays(new int[]{1,1}, 3));
+    }
+}
+
+class Key {
+    int index;
+    int target;
+
+    public Key(int index, int target) {
+        this.index = index;
+        this.target = target;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Key)) return false;
+        Key key = (Key) o;
+        return index == key.index && target == key.target;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(index, target);
     }
 }
